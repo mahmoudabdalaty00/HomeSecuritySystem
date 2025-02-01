@@ -19,6 +19,7 @@ namespace HomeSecuritySystem.Infrastructure
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
+
             /* 
              we should Select where we put our login action (success , fail , details )_
                 1- we can put it in the controller

@@ -14,10 +14,10 @@ namespace HomeSecuritySystem.Persistence
             this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<HSSDatabaseContext>(options =>
-               options.UseSqlServer(configuration.GetConnectionString("HomeSecuritySystem")));
+               options.UseSqlServer(configuration.GetConnectionString("HomeSecuritySystemDB")));
 
             services.AddScoped(typeof(IGenericRepoistory<>), typeof(GenericRepository<>));
-            services.AddScoped<IHomeRepository, IHomeRepository>();
+            services.AddScoped<IHomeRepository, HouseRepository>();
             services.AddScoped<IDeviceRepository, DeviceRepository>();
  
             return services;

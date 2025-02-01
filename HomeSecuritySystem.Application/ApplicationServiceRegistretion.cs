@@ -5,7 +5,7 @@ namespace HomeSecuritySystem.Application
 {
     public static class ApplicationServiceRegistration
     {
-        public static IServiceCollection ApplicationService
+        public static IServiceCollection AddApplicationService
             (this IServiceCollection services)
         {
 
@@ -15,6 +15,7 @@ namespace HomeSecuritySystem.Application
                   cfg.RegisterServicesFromAssembly(
                       Assembly.GetExecutingAssembly()));
 
+         
             return services;
         }
     }
