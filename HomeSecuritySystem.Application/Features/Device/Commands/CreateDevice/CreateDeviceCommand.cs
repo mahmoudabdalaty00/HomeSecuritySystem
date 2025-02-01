@@ -1,20 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MediatR;
 
-namespace HomeSecuritySystem.Domain
+namespace HomeSecuritySystem.Application.Features.Device.Commands.CreateDevice
 {
-    public class Device
+    public class CreateDeviceCommand : IRequest<int>
     {
-        [Key]
         public int Id { get; set; }
-        [Required]
         public string DeviceType { get; set; } = string.Empty;
-        [Required]
         public string Model { get; set; } = string.Empty;
-
         public bool Status { get; set; }
-        [Required]
         public int UserId { get; set; }
 
     }
+
 
 }
