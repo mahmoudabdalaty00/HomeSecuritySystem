@@ -22,7 +22,7 @@ namespace HomeSecuritySystem.Application.Features.Device.Commands.CreateDevice
         public async Task<int> Handle(CreateDeviceCommand request, CancellationToken cancellationToken)
         {
             // validate data 
-            if (await _deviceRepository.DeviceExist(request.DeviceType, request.Model))
+            if (await _deviceRepository.DeviceExist(request.DeviceType, request.Model,request.UserId))
             {
                 throw new Exception("Device with the same type and model already exists");
             }

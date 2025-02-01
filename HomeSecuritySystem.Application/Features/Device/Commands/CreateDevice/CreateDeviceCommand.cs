@@ -8,7 +8,7 @@ namespace HomeSecuritySystem.Application.Features.Device.Commands.CreateDevice
         public string DeviceType { get; set; } = string.Empty;
         public string Model { get; set; } = string.Empty;
         public bool Status { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
     }
 

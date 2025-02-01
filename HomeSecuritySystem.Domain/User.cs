@@ -5,7 +5,7 @@ namespace HomeSecuritySystem.Domain
     public class User
     {
         [Key]
-        public int UserId { get; set; }
+        public string Id { get; set; }
 
         [Required]
         public string? Username { get; set; }

@@ -34,7 +34,7 @@ namespace HomeSecuritySystem.Application.Features.Device.Commands.CreateDevice
 
         private async Task<bool> DeviceExist(CreateDeviceCommand command, CancellationToken token)
         {
-            return await _deviceRepository.DeviceExist(command.DeviceType, command.Model) ;
+            return await _deviceRepository.DeviceExist(command.DeviceType, command.Model, command.UserId) ;
         }
     }
 }

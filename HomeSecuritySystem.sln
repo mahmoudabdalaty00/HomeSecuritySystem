@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeSecuritySystem.Domain",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeSecuritySystem.Application", "HomeSecuritySystem.Application\HomeSecuritySystem.Application.csproj", "{967B4D01-9761-420B-8AEA-23DD08B6D98A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeSecuritySystem.Persistence", "HomeSecuritySystem.Persistence\HomeSecuritySystem.Persistence.csproj", "{C2BAEE77-CFE3-4D82-BD8A-C0F83D677BC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{967B4D01-9761-420B-8AEA-23DD08B6D98A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{967B4D01-9761-420B-8AEA-23DD08B6D98A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{967B4D01-9761-420B-8AEA-23DD08B6D98A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2BAEE77-CFE3-4D82-BD8A-C0F83D677BC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2BAEE77-CFE3-4D82-BD8A-C0F83D677BC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2BAEE77-CFE3-4D82-BD8A-C0F83D677BC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2BAEE77-CFE3-4D82-BD8A-C0F83D677BC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,5 +50,6 @@ Global
 		{2DA6F3DE-D7AE-4898-BD4D-DF2087A7EFA4} = {132130FB-B859-46C5-BC17-C3487BDDBB47}
 		{0C4C32CC-6246-4CA9-BDF8-2EA910F0D948} = {F0558B8E-D1D1-4080-A0D7-7CFDC2FE4983}
 		{967B4D01-9761-420B-8AEA-23DD08B6D98A} = {F0558B8E-D1D1-4080-A0D7-7CFDC2FE4983}
+		{C2BAEE77-CFE3-4D82-BD8A-C0F83D677BC7} = {2DA6F3DE-D7AE-4898-BD4D-DF2087A7EFA4}
 	EndGlobalSection
 EndGlobal
