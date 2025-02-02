@@ -7,9 +7,9 @@ namespace HomeSecuritySystem.Domain
         [Key]
         public int Id { get; set; }
         [Required]
-        public string DeviceType { get; set; } = string.Empty;
+        public string DeviceType { get; set; }  
         [Required]
-        public string Model { get; set; } = string.Empty;
+        public string Model { get; set; } 
 
         public bool Status { get; set; }
 

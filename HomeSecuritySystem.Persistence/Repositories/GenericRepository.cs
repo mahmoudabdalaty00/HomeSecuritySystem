@@ -23,6 +23,11 @@ namespace HomeSecuritySystem.Persistence.Repositories
                 {
                     await _dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT houses ON");
                 }
+                else if (entity is Domain.Device)
+                {
+                    await _dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT devices ON");
+
+                }
                 await _dbContext.Set<T>().AddAsync(entity);
                 await _dbContext.SaveChangesAsync();
 
@@ -31,6 +36,10 @@ namespace HomeSecuritySystem.Persistence.Repositories
                 if (entity is Domain.House)
                 {
                     await _dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT houses OFF");
+                } 
+                else if (entity is Domain.Device)
+                {
+                    await _dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT devices OFF");
                 }
                 await transaction.CommitAsync();
                 return entity;

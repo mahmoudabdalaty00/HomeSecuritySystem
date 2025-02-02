@@ -20,7 +20,8 @@ namespace HomeSecuritySystem.Application.Features.House.Query.GetAllHouses
             _mapper = mapper;
         }
 
-        public async Task<List<HouseDto>> Handle(GetHouseQuery request, CancellationToken cancellationToken)
+        public async Task<List<HouseDto>> Handle(
+            GetHouseQuery request, CancellationToken cancellationToken)
         {
             //Query DataBase
             var houses = await _houseRepository.GetAllAsync();

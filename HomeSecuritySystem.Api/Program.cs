@@ -17,6 +17,8 @@ builder.Services.AddInfrastructureService(builder.Configuration);
 builder.Services.AddPersistenceServices(builder.Configuration);
 
 builder.Services.AddControllers()
+    //i added this line to ignore the cycles in the json serialization
+    // i dont understand i know  
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;

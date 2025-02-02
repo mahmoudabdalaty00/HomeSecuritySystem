@@ -57,7 +57,8 @@ namespace HomeSecuritySystem.Api.Controllers
             // all actions occures in the background and return the result to the controller
             //all ocurres in CreateHouseCommandHandler class
             var result =  await _mediator.Send(house);
-            return CreatedAtAction(nameof(GetById), new { id = result },result);
+            return CreatedAtAction(
+                nameof(GetById), new { id = result },result);
 
         }
 

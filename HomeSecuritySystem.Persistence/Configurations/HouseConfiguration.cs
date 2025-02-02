@@ -35,7 +35,7 @@ namespace HomeSecuritySystem.Persistence.Configurations
                      Region = "Region",
                      PostalCode = 12345,
                      Country = "Country",
-                   
+
                  },
                  new House
                  {
@@ -80,8 +80,5 @@ namespace HomeSecuritySystem.Persistence.Configurations
 
              );
         }
-
-
-
     }
 }
