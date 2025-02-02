@@ -30,8 +30,8 @@ namespace HomeSecuritySystem.Domain
         [Required]
         public string Country { get; set; }
 
-        public ICollection<Device> Devices { get; set; }
-        public ICollection<User> Users { get; set; }
+      //  public ICollection<Device> Devices { get; set; }
+       // public ICollection<User> Users { get; set; }
 
     }
 }

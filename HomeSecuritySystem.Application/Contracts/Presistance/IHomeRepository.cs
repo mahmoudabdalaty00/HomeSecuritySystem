@@ -4,7 +4,7 @@ namespace HomeSecuritySystem.Application.Contracts.Presistance
 {
     public interface IHomeRepository : IGenericRepoistory<House>
     {
-        Task<bool> HouseExist(string name);
+        Task<bool> HouseExist(int id);
 
 
         Task<House> GetHouseWithDetails(int id);

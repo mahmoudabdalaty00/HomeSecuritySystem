@@ -11,43 +11,33 @@ namespace HomeSecuritySystem.Persistence.Repositories
         {
         }
 
-        public async Task<bool> HouseExist(string name)
+        public async Task<bool> HouseExist(int id)
         {
-            var exist = await _dbContext.houses.AnyAsync(h => h.Name == name);
+            var exist = await  _dbContext.houses.AnyAsync(h => h.Id == id)  == false;
             return await Task.FromResult(exist);
         }
 
         public async Task<House> GetHouseWithDetails(int id)
         {
-         var house =await _dbContext.houses.Include(
-                h => h.Devices).Include(h => h.Users)
-                    .FirstOrDefaultAsync(h => h.Id == id);
+         var house =await _dbContext.houses.FirstOrDefaultAsync(h => h.Id == id);
             return    house;
         }
 
         public async Task<List<House>> GetHouseWithDetails()
         {
-            var houses = await _dbContext.houses.Include(
-                      h => h.Devices)
-                            .Include(h => h.Users)
-                                   .ToListAsync();
+            var houses = await _dbContext.houses.ToListAsync();
 
             return houses;
         }
 
         public async Task<List<House>> GetHouseWithDetails(string userid)
         {
-             var houses =await _dbContext.houses
-                     .Include(h => h.Devices)
-                            .Include(h => h.Users)
-                                  .Where(h => h.Users
-                                            .Any(u => u.Id == userid))
-                                                      .ToListAsync();
+             var houses =await _dbContext.houses.ToListAsync();
 
             return houses;
         }
 
-
+         
     }
 
 }

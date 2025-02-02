@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using HomeSecuritySystem.Application.Features.House.Commands.CreateHouse;
+using HomeSecuritySystem.Application.Features.House.Commands.UpdateHouse;
 using HomeSecuritySystem.Application.Features.House.Query.GetAllHouses;
 using HomeSecuritySystem.Application.Features.House.Query.GetHouseDetails;
 using HomeSecuritySystem.Domain;
@@ -16,6 +18,11 @@ namespace HomeSecuritySystem.Application.MappingProfiles
         {
             CreateMap<HouseDto , House>().ReverseMap();
             CreateMap<House, HouseDetailDto>();
+            CreateMap<CreateHouseCommand, House>();
+            CreateMap<UpdateHouseCommand, House>();
+            CreateMap<UpdateHouseCommand, House>()
+          .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id));
+
         }
     }
 }

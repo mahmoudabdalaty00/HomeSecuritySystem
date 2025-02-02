@@ -45,7 +45,7 @@ namespace HomeSecuritySystem.Application.Features.House.Commands.CreateHouse
 
         private async Task<bool> HouseExist(CreateHouseCommand command, CancellationToken token)
         {
-            return await _homeRepository.HouseExist(command.Name);
+            return await _homeRepository.HouseExist(command.Id);
         }
     }
 }

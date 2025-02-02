@@ -16,10 +16,7 @@ namespace HomeSecuritySystem.Persistence.DBContext
 
         }
 
-        public DbSet<House> houses { get; set; }
-
-        public DbSet<Device> devices { get; set; }
-
+    
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //we can use this to configure the database entities in the domain were we make configurations  
@@ -44,8 +41,14 @@ namespace HomeSecuritySystem.Persistence.DBContext
                      }
                  );
             */
-
+ 
             base.OnModelCreating(modelBuilder);
         }
+        
+        
+        public DbSet<House> houses { get; set; }
+
+        public DbSet<Device> devices { get; set; }
+
     }
 }

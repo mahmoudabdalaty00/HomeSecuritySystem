@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HomeSecuritySystem.Application.Contracts.Presistance;
 using HomeSecuritySystem.Application.Exceptions;
+using HomeSecuritySystem.Application.Features.House.Commands.CreateHouse;
 using MediatR;
 
 namespace HomeSecuritySystem.Application.Features.House.Commands.UpdateHouse
@@ -17,20 +18,31 @@ namespace HomeSecuritySystem.Application.Features.House.Commands.UpdateHouse
         public async Task<Unit> Handle(UpdateHouseCommand request, CancellationToken cancellationToken)
         {
             //validate the request
+            var validator = new UpdateHouseCommandValidator();
+            var validationResult = await validator.ValidateAsync(request);
+
+            if (validationResult.Errors.Any())
+                throw new BadRequestException("Invalid House", validationResult);
+
 
             //map the request to the Domain house object
-            var house = _mapper.Map<Domain.House>(request);
-
             // here we check it exist or not first before deleting
-            if (house == null)
-                throw new NotFoundException(nameof(House), request);
+            var existingHouse = await _houseRepository.GetByIdAsync(request.Id);
+            if (existingHouse == null)
+            {
+                throw new NotFoundException(nameof(House), request.Id);
+            }
+            _mapper.Map(request, existingHouse);
 
-            // update the house object in database
-            await _houseRepository.UpdateAsync(house);
+            // Update the house object in the database
+            await _houseRepository.UpdateAsync(existingHouse);
+
 
             // return the unit
-           return Unit.Value;
+            return Unit.Value;
         }
     }
-
 }
+
+
+

@@ -21,7 +21,7 @@ namespace HomeSecuritySystem.Application.Features.House.Query.GetHouseDetails
 
         public string? PostalCode { get; set; }
 
-        public ICollection<DeviceDto>? Devices { get; set; }
+       // public ICollection<DeviceDto>? Devices { get; set; }
         // public ICollection<UserDto> Users { get; set; }
     }
 }

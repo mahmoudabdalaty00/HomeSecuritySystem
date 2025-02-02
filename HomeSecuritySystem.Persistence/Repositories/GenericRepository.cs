@@ -17,23 +17,54 @@ namespace HomeSecuritySystem.Persistence.Repositories
 
         public async Task<T> CreateAsync(T entity)
         {
-            await _dbContext.Set<T>().AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
-            return entity;
+            using (var transaction = await _dbContext.Database.BeginTransactionAsync())
+            {
+                if (entity is Domain.House)
+                {
+                    await _dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT houses ON");
+                }
+                await _dbContext.Set<T>().AddAsync(entity);
+                await _dbContext.SaveChangesAsync();
+
+
+
+                if (entity is Domain.House)
+                {
+                    await _dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT houses OFF");
+                }
+                await transaction.CommitAsync();
+                return entity;
+            }
+
         }
 
         public async Task<T> UpdateAsync(T entity)
         {
+            using (var transaction = await _dbContext.Database.BeginTransactionAsync())
+            {
+                if (entity is Domain.House house)
+                {
+                    // Ensure the Id property is set
+                    if (house.Id == 0)
+                    {
+                        throw new ArgumentException("House Id must be specified for update operation.");
+                    }
 
-            _dbContext.Set<T>().Update(entity);
+                    await _dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT houses ON");
+                }
 
-            //we can use this way to update the entity state if we modified in SaveChangesAsync in my basic code 
-            // _dbContext.Entry(entity).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
-            return entity;
+                _dbContext.Set<T>().Update(entity);
+                await _dbContext.SaveChangesAsync();
 
+                if (entity is Domain.House)
+                {
+                    await _dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT houses OFF");
+                }
+
+                await transaction.CommitAsync();
+                return entity;
+            }
         }
-
 
 
         public async Task DeleteAsync(T entity)
