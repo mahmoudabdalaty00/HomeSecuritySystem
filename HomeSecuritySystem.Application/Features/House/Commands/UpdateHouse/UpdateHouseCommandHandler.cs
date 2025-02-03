@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HomeSecuritySystem.Application.Contracts.Logging;
 using HomeSecuritySystem.Application.Contracts.Presistance;
 using HomeSecuritySystem.Application.Exceptions;
 using HomeSecuritySystem.Application.Features.House.Commands.CreateHouse;
@@ -10,10 +11,12 @@ namespace HomeSecuritySystem.Application.Features.House.Commands.UpdateHouse
     {
         private readonly IMapper _mapper;
         private readonly IHomeRepository _houseRepository;
-        public UpdateHouseCommandHandler(IMapper mapper, IHomeRepository houseRepository)
+        private readonly IAppLogger<UpdateHouseCommandHandler> _logger;
+        public UpdateHouseCommandHandler(IMapper mapper, IHomeRepository houseRepository, IAppLogger<UpdateHouseCommandHandler> appLogger)
         {
             _mapper = mapper;
             _houseRepository = houseRepository;
+            _logger = appLogger;
         }
         public async Task<Unit> Handle(UpdateHouseCommand request, CancellationToken cancellationToken)
         {
@@ -30,6 +33,7 @@ namespace HomeSecuritySystem.Application.Features.House.Commands.UpdateHouse
             var existingHouse = await _houseRepository.GetByIdAsync(request.Id);
             if (existingHouse == null)
             {
+                _logger.LogError("Validation errors - {Errors}",validationResult.Errors);
                 throw new NotFoundException(nameof(House), request.Id);
             }
             _mapper.Map(request, existingHouse);

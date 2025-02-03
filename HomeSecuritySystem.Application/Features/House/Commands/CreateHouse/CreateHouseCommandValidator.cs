@@ -35,8 +35,20 @@ namespace HomeSecuritySystem.Application.Features.House.Commands.CreateHouse
                 .MaximumLength(50)
                 .WithMessage("{PropertyName} must not exceed 50 characters.");
 
+            RuleFor(h => h.Region)
+              .NotEmpty().WithMessage("{PropertyName} is required.")
+              .NotNull()
+              .MaximumLength(50).WithMessage("{PropertyName} must not exceed 50 characters.");
 
-            RuleFor(p => p )
+            RuleFor(h => h.PostalCode)
+                .GreaterThan(0).WithMessage("{PropertyName} must be greater than 0.");
+
+            RuleFor(h => h.Country)
+                .NotEmpty().WithMessage("{PropertyName} is required.")
+                .NotNull()
+                .MaximumLength(50).WithMessage("{PropertyName} must not exceed 50 characters.");
+
+            RuleFor(p => p)
                 .MustAsync(HouseExist)
                 .WithMessage("House already exists");
 
@@ -45,7 +57,9 @@ namespace HomeSecuritySystem.Application.Features.House.Commands.CreateHouse
 
         private async Task<bool> HouseExist(CreateHouseCommand command, CancellationToken token)
         {
-            return await _homeRepository.HouseExist(command.Id);
+            // check if the house already exists if it does, return false to the validator  to show the error message     
+            // if it isnot work delete ==false because i added it to make the test pass
+            return await _homeRepository.HouseExist(command.Id) == false;
         }
     }
 }

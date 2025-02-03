@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HomeSecuritySystem.Application.Contracts.Logging;
 using HomeSecuritySystem.Application.Contracts.Presistance;
 using HomeSecuritySystem.Application.Exceptions;
 using MediatR;
@@ -10,11 +11,14 @@ namespace HomeSecuritySystem.Application.Features.House.Commands.CreateHouse
     {
         private readonly IHomeRepository _houseRepository;
         private readonly IMapper _mapper;
+        private readonly IAppLogger<CreateHouseCommandHandler> _logger;
+
         public CreateHouseCommandHandler(
-            IHomeRepository houseRepository, IMapper mapper)
+            IHomeRepository houseRepository, IMapper mapper, IAppLogger<CreateHouseCommandHandler> appLogger)
         {
             _mapper = mapper;
             _houseRepository = houseRepository;
+            _logger = appLogger;
         }
         public async Task<int> Handle(CreateHouseCommand request, CancellationToken cancellationToken)
         {
@@ -23,8 +27,10 @@ namespace HomeSecuritySystem.Application.Features.House.Commands.CreateHouse
             var validationResult = await validator.ValidateAsync(request);
 
             if (validationResult.Errors.Any())
-                throw new BadRequestException("Invalid House",validationResult);
-
+            {
+                _logger.LogError("Validation errors - {Errors}", validationResult.Errors);
+                throw new BadRequestException("Invalid House", validationResult);
+            }
 
             // this is another way to create a new domain house object
             var house = _mapper.Map<Domain.House>(request);
