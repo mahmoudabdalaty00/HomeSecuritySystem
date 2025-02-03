@@ -10,17 +10,15 @@ namespace HomeSecuritySystem.Application.Exceptions
 
         } 
         
-        public BadRequestException(string message,ValidationResult validationResult)
+        public BadRequestException(string message,
+            ValidationResult validationResult)
+
             : base($"Entity \"{message}\" was BadRequest Message")
         {
-            ValidationErrors = new();
-            foreach (var error in validationResult.Errors)
-            {
-                ValidationErrors.Add(error.ErrorMessage);
-            }
+            ValidationErrors = validationResult.ToDictionary();
         }
 
 
-        public List<string> ValidationErrors  { get; set; }
+        public IDictionary<string, string[]> ValidationErrors  { get; set; }
     }
 }

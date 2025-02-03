@@ -1,3 +1,4 @@
+using HomeSecuritySystem.Api.Middleware;
 using HomeSecuritySystem.Application;
 using HomeSecuritySystem.Application.Contracts.Presistance;
 using HomeSecuritySystem.Infrastructure;
@@ -45,6 +46,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IHomeRepository, HouseRepository>();
 
 var app = builder.Build();
+// we add our middleware to the pipeline & we use it to make our application more robust and handle exceptions
+app.UseMiddleware<ExceptionMiddleware>();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
